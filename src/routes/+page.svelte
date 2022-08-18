@@ -54,17 +54,19 @@
             sender: 'ME',
             message: inputValue
         }])
-        
+        const msg = inputValue
+        inputValue = ''
+
         const answer = await node.ask({
             transportPackage: {
                 p2pChannelName: "message",
-                message: inputValue,
+                message: msg,
             },
             livingTime: 1200,
             stickyNode: true,
             localWork: false
         });
-        inputValue = ''
+
         console.log(answer)
     }
 
