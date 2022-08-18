@@ -10,7 +10,7 @@
     const node = new foxql({
         maxNodeCount: 50, // max connection limit 
         maxCandidateCallTime: 750, // how long to wait for a response from a candidate node
-        powPoolingTime: 350,
+        powPoolingTime: 900,
         bridgeServer: {
             host: "https://foxql-bridge.herokuapp.com", // which bridge server to use
         },
@@ -54,21 +54,24 @@
             sender: 'ME',
             message: inputValue
         }])
-        node.ask({
+        inputValue = ''
+        const answer = await node.ask({
             transportPackage: {
                 p2pChannelName: "message",
                 message: inputValue,
             },
-            livingTime: 1000,
+            livingTime: 1200,
             stickyNode: true,
             localWork: false
         });
 
-        inputValue = ''
+        console.log(answer)
     }
 
     onMount(()=> {
         node.start();
+        console.log(node)
+        window.p2p = node
     })
 </script>
 
